@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,27 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -38,16 +24,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -229,6 +205,141 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _desafio11() {
+    int numero = 5;
+    List<int> tabuada = [];
+
+    for (int i = 1; i <= 10; i++) {
+      tabuada.add(numero * i);
+    }
+
+    setState(() {
+      _result = tabuada.toString();
+    });
+  }
+
+  void _desafio12() {
+    List<int> numeros = [2, 3, 6];
+    List<int> quadrados = [];
+
+    // Alternativa utilizando forEach (escolher apenas um ou outro)
+    numeros.forEach((elemento) {
+      int quadrado = elemento * elemento;
+      quadrados.add(quadrado);
+    });
+
+    // Alternativa utilizando for normal (escolher apenas um ou outro)
+    for (int i = 0; i < numeros.length; i++) {
+      int quadrado = numeros[i] * numeros[i];
+      quadrados.add(quadrado);
+    }
+
+    setState(() {
+      _result = quadrados.toString();
+    });
+  }
+
+  void _desafio13() {
+    List<int> numeros = [2, 3, 6, 5, 65, 9, 6];
+    int qtdPares = 0;
+    int qtdImpares = 0;
+
+    // Alternativa utilizando forEach (escolher apenas um ou outro)
+    numeros.forEach((element) {
+      if (element % 2 == 0) {
+        qtdPares++;
+      } else {
+        qtdImpares++;
+      }
+    });
+
+    // Alternativa utilizando for normal (escolher apenas um ou outro)
+    for (int i = 0; i < numeros.length; i++) {
+      if (numeros[i] % 2 == 0) {
+        qtdPares++;
+      } else {
+        qtdImpares++;
+      }
+    }
+
+    setState(() {
+      _result = 'Pares: $qtdPares - Impares: $qtdImpares';
+    });
+  }
+
+  void _desafio14() {
+    List<int> numeros = [2, 3, 2, 5, 65, 9, 6];
+
+    int menor = numeros.reduce(min);
+    int maior = numeros.reduce(max);
+
+    setState(() {
+      _result = 'Menor: $menor - maior: $maior';
+    });
+  }
+
+  void _desafio15() {
+    int numero = 6;
+
+    List<int> sequencia = [];
+
+    for (int i = 0; i <= numero; i++) {
+      sequencia.add(i);
+    }
+
+    setState(() {
+      _result = sequencia.toString();
+    });
+  }
+
+  void _desafio16() {
+    String palavra = 'dado';
+
+    String palavraAoContrario = palavra.split('').reversed.join();
+    String frase;
+
+    if (palavra == palavraAoContrario) {
+      frase = 'A palavra $palavra é um palíndromo';
+    } else {
+      frase = 'A palavra $palavra não é um palíndromo';
+    }
+
+    setState(() {
+      _result = frase;
+    });
+  }
+
+  void _desafio17() {
+    int numero = 7;
+    String frase = '$numero é um número primo.';
+
+    for (int i = 2; i < numero; i++) {
+      if (numero % i == 0) {
+        frase = '$numero não é um número primo.';
+      }
+    }
+
+    setState(() {
+      _result = frase;
+    });
+  }
+
+  void _desafio18() {
+    String palavra = 'eu';
+    String frase = 'Eu posso posso eu eu tudo o mais que eu quiser Eu';
+
+    List<String> palavras = frase.split(' ');
+
+    var ocorrencias = palavras
+        .where((element) => element.toLowerCase() == palavra.toLowerCase());
+
+    int qtdOcorrencias = ocorrencias.length;
+
+    setState(() {
+      _result = 'A palavra "$palavra" aparece $qtdOcorrencias vezes';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,7 +362,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _desafio10,
+        onPressed: _desafio18,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
