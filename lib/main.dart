@@ -293,19 +293,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _desafio16() {
-    String palavra = 'dado';
+    String frase = 'A base do teto desaba';
 
-    String palavraAoContrario = palavra.split('').reversed.join();
-    String frase;
+    String fraseJunta = frase.toLowerCase().replaceAll(' ', '');
+    String fraseAoContrario = fraseJunta.split('').reversed.join();
 
-    if (palavra == palavraAoContrario) {
-      frase = 'A palavra $palavra é um palíndromo';
+    String resposta;
+
+    if (fraseJunta == fraseAoContrario) {
+      resposta = 'A frase "$frase" é um palíndromo';
     } else {
-      frase = 'A palavra $palavra não é um palíndromo';
+      resposta = 'A frase "$frase" não é um palíndromo';
     }
 
     setState(() {
-      _result = frase;
+      _result = resposta;
     });
   }
 
@@ -362,7 +364,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _desafio18,
+        onPressed: _desafio16,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
